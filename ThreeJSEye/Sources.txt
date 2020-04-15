@@ -1,0 +1,4 @@
+https://threejs.org/docs/#api/en/loaders/TextureLoader
+https://stackoverflow.com/questions/14105410/three-js-not-displaying-anything
+https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene
+https://threejs.org/docs/#api/en/geometries/SphereGeometry
