@@ -29,16 +29,9 @@ var geometry = new THREE.SphereGeometry( 1, 60, 60 );                           
 var texture = new THREE.TextureLoader().load( 'textures/iris5.png' );                                       //Load tekening
 var material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture } );                            //Coloring the cube
 var globe = new THREE.Mesh( geometry, material );                                                           //Apply material to object.
-scene.add( globe );                                                                                         //Add to coordination (0,0,0), camera en cube zitten in elkaar.
-
-
-//The globe2
-var geometry2 = new THREE.SphereGeometry( 1, 60, 60 );                                                       //Radius, width, height
-var texture2 = new THREE.TextureLoader().load( 'textures/iris5.png' );                                       //Load tekening
-var material2 = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture } );                            //Coloring the cube
-var globe2 = new THREE.Mesh( geometry2, material2 );                                                           //Apply material to object.
-globe2.position.x = 3;
-scene.add( globe2 );   
+globe.rotation.x = 0;
+globe.rotation.y = -1;
+scene.add( globe );                                                                                         //Add to coordination (0,0,0), camera en cube zitten in elkaar.  
 
 camera.position.z = 5;                                                                                      //Hoe ver de camera is ingezoemd                                                                                    //Move camera zodat die niet in de cube vast zit.
 
@@ -51,35 +44,65 @@ domEvents.addEventListener(globe, 'mouseover', event =>{
 })
 
 domEvents.addEventListener(globe, 'mouseout', event =>{
-    globe.scale.set(1,1,1)    
+    globe.scale.set(1,1,1)
 })
 
 document.onmousemove = function(event){
     //var x = (event.clientX * 100 / window.innerWidth)/10 * 2 -1 ;
-    var y = - 1 * (event.clientY / window.innerHeight);
-    var x = 1 * (event.clientX / window.innerWidth) ;
+    const y = - 2 * (event.clientY / window.innerHeight);
+    const x = 2 * (event.clientX / window.innerWidth) ;
 
-    //console.log("Mouseposition",x)
+    console.log("Mouseposition",y)
     globe.position.x = x;
     globe.position.y = y;
     
     // globe.rotate.x = 30;
     // globae.rotate.y = 2;
+
+    if(x <=1 && y<-1){
+        //MousePos is (0,-2)
+        globe.rotation.x = 1;
+        globe.rotation.y = -2
+    }
+
+    if(x>1 && y<-1){
+        //MousePos is (2,-2)
+        globe.rotation.x = 1
+        globe.rotation.y = 0
+    }
+
+    if(x>1 && y>-1){
+        //MousePos is (2,0)
+        globe.rotation.x = -1
+        globe.rotation.y = 0
+    }
+
+    if(x<1 && y>-1){
+        //MousePos is (0,0)
+        globe.rotation.x = -1
+        globe.rotation.y = -2
+    }
+
 }
+
+
+
 
 //Rendering the scene, render/animate loop
 function animate() {
     requestAnimationFrame( animate );                                                                       //RequestAnimationFrame zorgt ervoor dat de animatie pauzeert wanneer je naar een andere browser pagina gaat. Miss is SetInterval handiger?
-
     //Rotate Eye
     // globe.rotation.x += 0.01;
     // globe.rotation.y += 0.01;
 
-    globe.rotation.x == 0
-    globe.rotation.y += 0.01;
-    console.log(globe.rotation.y)
+    // globe.rotation.x == 0
+    // globe.rotation.y += 0.01;
+    // if(globe.rotation.y == 0.05){
+    //     globe.rotation.y = 0
+    // }
+
+    //console.log(globe.rotation.y)
 
     renderer.render( scene, camera );
 };
-
 animate();
