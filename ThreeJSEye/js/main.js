@@ -49,15 +49,12 @@ domEvents.addEventListener(globe, 'mouseout', event =>{
 
 document.onmousemove = function(event){
     //var x = (event.clientX * 100 / window.innerWidth)/10 * 2 -1 ;
-    const y = - 2 * (event.clientY / window.innerHeight);
-    const x = 2 * (event.clientX / window.innerWidth) ;
+    const y = - 3 * (event.clientY / window.innerHeight);
+    const x = 3 * (event.clientX / window.innerWidth) ;
 
-    console.log("Mouseposition",y)
     globe.position.x = x;
     globe.position.y = y;
-    
-    // globe.rotate.x = 30;
-    // globae.rotate.y = 2;
+
 
     if(x <=1 && y<-1){
         //MousePos is (0,-2)
