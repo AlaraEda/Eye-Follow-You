@@ -40,7 +40,7 @@ const domEvents = new THREEx.DomEvents(camera, renderer.domElement)
 
 //Globe Big/Small
 domEvents.addEventListener(globe, 'mouseover', event =>{
-    globe.scale.set(1.3,1.3,1.3)
+    globe.scale.set(1.2,1.2,1.2)
 })
 
 domEvents.addEventListener(globe, 'mouseout', event =>{
@@ -56,8 +56,6 @@ document.onmousemove = function(event){
     globe.position.x = x;
     globe.position.y = y;
 
-    console.log("Dit is de x ", x)
-    console.log("Dit is de y", y)
     if(x <0.5 && y<-0.5){
         console.log("Links-onder")
         // //MousePos is (0,-2) links-onder
@@ -86,6 +84,12 @@ document.onmousemove = function(event){
         globe.rotation.y = -2
     }
 
+    if(x>0.25 && x<0.75 && y<-0.25 && y>-0.75){
+        console.log("midden")
+        //MousePos is (0,0)
+        globe.rotation.x = 0
+        globe.rotation.y = -1
+    }
 }
 
 
