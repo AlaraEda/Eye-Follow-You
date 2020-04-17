@@ -49,32 +49,38 @@ domEvents.addEventListener(globe, 'mouseout', event =>{
 
 document.onmousemove = function(event){
     //var x = (event.clientX * 100 / window.innerWidth)/10 * 2 -1 ;
-    const y = - 3 * (event.clientY / window.innerHeight);
-    const x = 3 * (event.clientX / window.innerWidth) ;
+    //Zodat de muis als beginpunt het middenvak neemt.
+    const y = (event.clientY / -window.innerHeight);
+    const x = (event.clientX / window.innerWidth) ;
 
     globe.position.x = x;
     globe.position.y = y;
 
-
-    if(x <=1 && y<-1){
-        //MousePos is (0,-2)
+    console.log("Dit is de x ", x)
+    console.log("Dit is de y", y)
+    if(x <0.5 && y<-0.5){
+        console.log("Links-onder")
+        // //MousePos is (0,-2) links-onder
         globe.rotation.x = 1;
         globe.rotation.y = -2
     }
 
-    if(x>1 && y<-1){
+    if(x>0.5 && y<-0.5){
+        console.log("Rechts-onder")
         //MousePos is (2,-2)
         globe.rotation.x = 1
         globe.rotation.y = 0
     }
 
-    if(x>1 && y>-1){
+    if(x>0.5 && y>-0.5){
+        console.log("Rechts-boven")
         //MousePos is (2,0)
         globe.rotation.x = -1
         globe.rotation.y = 0
     }
 
-    if(x<1 && y>-1){
+    if(x<0.5 && y>-0.5){
+        console.log("Links-boven")
         //MousePos is (0,0)
         globe.rotation.x = -1
         globe.rotation.y = -2
