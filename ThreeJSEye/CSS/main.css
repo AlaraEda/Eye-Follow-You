@@ -7,3 +7,7 @@ canvas {
     height: 100%;
     display: block;
 }
+
+html {
+    cursor: url('/textures/Bluetooth\ Phone.jpeg'), auto;
+}

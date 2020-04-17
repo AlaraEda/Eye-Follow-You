@@ -84,6 +84,13 @@ document.onmousemove = function(event){
         globe.rotation.y = -2
     }
 
+    if(x<0.25 && y>-0.75 && y<-0.25 ){
+        console.log("Links")
+        //MousePos is (0,0)
+        globe.rotation.x = -1
+        globe.rotation.y = -2
+    }
+
     if(x>0.25 && x<0.75 && y<-0.25 && y>-0.75){
         console.log("midden")
         //MousePos is (0,0)
