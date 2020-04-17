@@ -29,9 +29,14 @@ var geometry = new THREE.SphereGeometry( 1, 60, 60 );                           
 var texture = new THREE.TextureLoader().load( 'textures/iris5.png' );                                       //Load tekening
 var material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture } );                            //Coloring the cube
 var globe = new THREE.Mesh( geometry, material );                                                           //Apply material to object.
-globe.rotation.x = 0;
-globe.rotation.y = -1;
+var globe2 = new THREE.Mesh( geometry, material );                                                           //Apply material to object.
+// globe.rotation.x = 0;
+// globe.rotation.y = -1;
 scene.add( globe );                                                                                         //Add to coordination (0,0,0), camera en cube zitten in elkaar.  
+scene.add( globe2 );                                                                                         //Add to coordination (0,0,0), camera en cube zitten in elkaar.  
+
+globe.position.x = -1.5;
+globe2.position.x = 1.5;
 
 camera.position.z = 5;                                                                                      //Hoe ver de camera is ingezoemd                                                                                    //Move camera zodat die niet in de cube vast zit.
 
@@ -40,66 +45,35 @@ const domEvents = new THREEx.DomEvents(camera, renderer.domElement)
 
 //Globe Big/Small
 domEvents.addEventListener(globe, 'mouseover', event =>{
-    globe.scale.set(1.2,1.2,1.2)
+    // globe.scale.set(1.2,1.2,1.2)
 })
 
 domEvents.addEventListener(globe, 'mouseout', event =>{
-    globe.scale.set(1,1,1)
+    // globe.scale.set(1,1,1)
 })
 
-document.onmousemove = function(event){
-    //var x = (event.clientX * 100 / window.innerWidth)/10 * 2 -1 ;
-    //Zodat de muis als beginpunt het middenvak neemt.
-    const y = (event.clientY / -window.innerHeight);
-    const x = (event.clientX / window.innerWidth) ;
+let lookMaxX = 0.01;
+let lookMaxY = 0.01;
 
-    globe.position.x = x;
-    globe.position.y = y;
+document.onmousemove = function(event) {
+    const fromCenterpointX = (window.innerWidth / 2) - (event.clientX);
+    const fromCenterpointY = (window.innerHeight / 2) - (event.clientY);
 
-    if(x <0.5 && y<-0.5){
-        console.log("Links-onder")
-        // //MousePos is (0,-2) links-onder
-        globe.rotation.x = 1;
-        globe.rotation.y = -2
-    }
+    const x = (fromCenterpointX / 2) / (window.innerWidth / 2) * 100;
+    const y = (fromCenterpointY / 2) / (window.innerHeight / 2) * 100;
 
-    if(x>0.5 && y<-0.5){
-        console.log("Rechts-onder")
-        //MousePos is (2,-2)
-        globe.rotation.x = 1
-        globe.rotation.y = 0
-    }
+    console.log(y, x);
 
-    if(x>0.5 && y>-0.5){
-        console.log("Rechts-boven")
-        //MousePos is (2,0)
-        globe.rotation.x = -1
-        globe.rotation.y = 0
-    }
+    rotateScene(globe, -y, -x);
+    rotateScene(globe2, -y, -x);
 
-    if(x<0.5 && y>-0.5){
-        console.log("Links-boven")
-        //MousePos is (0,0)
-        globe.rotation.x = -1
-        globe.rotation.y = -2
-    }
-
-    if(x<0.25 && y>-0.75 && y<-0.25 ){
-        console.log("Links")
-        //MousePos is (0,0)
-        globe.rotation.x = -1
-        globe.rotation.y = -2
-    }
-
-    if(x>0.25 && x<0.75 && y<-0.25 && y>-0.75){
-        console.log("midden")
-        //MousePos is (0,0)
-        globe.rotation.x = 0
-        globe.rotation.y = -1
-    }
+    
 }
 
-
+function rotateScene(globe_, deltaX, deltaY) {
+    globe_.rotation.y = -1 + deltaY * lookMaxY;
+    globe_.rotation.x = 0.15 + deltaX * lookMaxX;
+}
 
 
 //Rendering the scene, render/animate loop
