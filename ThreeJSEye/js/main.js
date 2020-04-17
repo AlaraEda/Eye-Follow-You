@@ -56,21 +56,21 @@ let lookMaxX = 0.01;
 let lookMaxY = 0.01;
 
 document.onmousemove = function(event) {
+    // Get center point from window
     const fromCenterpointX = (window.innerWidth / 2) - (event.clientX);
     const fromCenterpointY = (window.innerHeight / 2) - (event.clientY);
 
+    // Calculate the percentage from centerpoint
     const x = (fromCenterpointX / 2) / (window.innerWidth / 2) * 100;
     const y = (fromCenterpointY / 2) / (window.innerHeight / 2) * 100;
 
-    console.log(y, x);
-
+    // Rotate globes (eyes)
     rotateScene(globe, -y, -x);
     rotateScene(globe2, -y, -x);
-
-    
 }
 
 function rotateScene(globe_, deltaX, deltaY) {
+    // Make sure to maximize the rotation and the eye keep looking forward
     globe_.rotation.y = -1 + deltaY * lookMaxY;
     globe_.rotation.x = 0.15 + deltaX * lookMaxX;
 }
