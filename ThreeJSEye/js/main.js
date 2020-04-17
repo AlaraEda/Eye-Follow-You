@@ -33,10 +33,10 @@ var globe2 = new THREE.Mesh( geometry, material );                              
 // globe.rotation.x = 0;
 // globe.rotation.y = -1;
 scene.add( globe );                                                                                         //Add to coordination (0,0,0), camera en cube zitten in elkaar.  
-scene.add( globe2 );                                                                                         //Add to coordination (0,0,0), camera en cube zitten in elkaar.  
+// scene.add( globe2 );                                                                                         //Add to coordination (0,0,0), camera en cube zitten in elkaar.  
 
-globe.position.x = -1.5;
-globe2.position.x = 1.5;
+globe.position.x = 0;
+// globe2.position.x = 1.5;
 
 camera.position.z = 5;                                                                                      //Hoe ver de camera is ingezoemd                                                                                    //Move camera zodat die niet in de cube vast zit.
 
@@ -52,8 +52,8 @@ domEvents.addEventListener(globe, 'mouseout', event =>{
     // globe.scale.set(1,1,1)
 })
 
-let lookMaxX = 0.01;
-let lookMaxY = 0.01;
+let lookMaxX = 0.02;
+let lookMaxY = 0.02;
 
 document.onmousemove = function(event) {
     const fromCenterpointX = (window.innerWidth / 2) - (event.clientX);
@@ -65,7 +65,7 @@ document.onmousemove = function(event) {
     console.log(y, x);
 
     rotateScene(globe, -y, -x);
-    rotateScene(globe2, -y, -x);
+    // rotateScene(globe2, -y, -x);
 
     
 }
