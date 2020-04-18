@@ -20,7 +20,7 @@ window.addEventListener('resize', () =>{
     renderer.setSize(window.innerWidth, window.innerHeight);                                                //Zet de size om naar de current grootte.
     camera.aspect = window.innerWidth / window.innerHeight;                                                 //Stel de camera aspect opnieuw in met e nieuwe gegevens van het venster.
 
-    //camera.updateProjectMatrix();                                                                           //Update camera everytime an adjustment is made.
+    //camera.updateProjectMatrix();                                                                         //Update camera everytime an adjustment is made.
 })
 
 
@@ -29,14 +29,12 @@ var geometry = new THREE.SphereGeometry( 1, 60, 60 );                           
 var texture = new THREE.TextureLoader().load( 'textures/iris5.png' );                                       //Load tekening
 var material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture } );                            //Coloring the cube
 var globe = new THREE.Mesh( geometry, material );                                                           //Apply material to object.
-var globe2 = new THREE.Mesh( geometry, material );                                                           //Apply material to object.
-// globe.rotation.x = 0;
-// globe.rotation.y = -1;
+var globe2 = new THREE.Mesh( geometry, material );                                                          //Apply material to object.
+
 scene.add( globe );                                                                                         //Add to coordination (0,0,0), camera en cube zitten in elkaar.  
-// scene.add( globe2 );                                                                                         //Add to coordination (0,0,0), camera en cube zitten in elkaar.  
+// scene.add( globe2 );                                                                                     //Add to coordination (0,0,0), camera en cube zitten in elkaar.  
 
 globe.position.x = 0;
-// globe2.position.x = 1.5;
 
 camera.position.z = 5;                                                                                      //Hoe ver de camera is ingezoemd                                                                                    //Move camera zodat die niet in de cube vast zit.
 
@@ -56,20 +54,21 @@ let lookMaxX = 0.02;
 let lookMaxY = 0.02;
 
 document.onmousemove = function(event) {
+    // Get center point from window
     const fromCenterpointX = (window.innerWidth / 2) - (event.clientX);
     const fromCenterpointY = (window.innerHeight / 2) - (event.clientY);
 
+    // Calculate the percentage from centerpoint
     const x = (fromCenterpointX / 2) / (window.innerWidth / 2) * 100;
     const y = (fromCenterpointY / 2) / (window.innerHeight / 2) * 100;
 
     console.log(y, x);
 
+    // Rotate globes (eyes)
     rotateScene(globe, -y, -x);
-    // rotateScene(globe2, -y, -x);
-
-    
 }
 
+// Make sure to maximize the rotation and the eye keep looking forward
 function rotateScene(globe_, deltaX, deltaY) {
     globe_.rotation.y = -1 + deltaY * lookMaxY;
     globe_.rotation.x = 0.15 + deltaX * lookMaxX;
@@ -79,18 +78,7 @@ function rotateScene(globe_, deltaX, deltaY) {
 //Rendering the scene, render/animate loop
 function animate() {
     requestAnimationFrame( animate );                                                                       //RequestAnimationFrame zorgt ervoor dat de animatie pauzeert wanneer je naar een andere browser pagina gaat. Miss is SetInterval handiger?
-    //Rotate Eye
-    // globe.rotation.x += 0.01;
-    // globe.rotation.y += 0.01;
-
-    // globe.rotation.x == 0
-    // globe.rotation.y += 0.01;
-    // if(globe.rotation.y == 0.05){
-    //     globe.rotation.y = 0
-    // }
-
-    //console.log(globe.rotation.y)
-
     renderer.render( scene, camera );
 };
+
 animate();
