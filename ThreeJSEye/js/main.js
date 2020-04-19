@@ -29,6 +29,7 @@ var geometry = new THREE.SphereGeometry( 1, 60, 60 );                           
 var texture = new THREE.TextureLoader().load( 'textures/iris5.png' );                                       //Load tekening
 var material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture } );                            //Coloring the cube
 var globe = new THREE.Mesh( geometry, material );                                                           //Apply material to object.
+
 globe.rotation.x = 0;
 globe.rotation.y = -1;
 scene.add( globe );                                                                                         //Add to coordination (0,0,0), camera en cube zitten in elkaar.  
@@ -47,6 +48,7 @@ domEvents.addEventListener(globe, 'mouseout', event =>{
     globe.scale.set(1,1,1)
 })
 
+
 document.onmousemove = function(event){
     //var x = (event.clientX * 100 / window.innerWidth)/10 * 2 -1 ;
     //Zodat de muis als beginpunt het middenvak neemt.
@@ -54,49 +56,76 @@ document.onmousemove = function(event){
     const x = (event.clientX / window.innerWidth) ;
 
     globe.position.x = x;
-    globe.position.y = y;
+    globe.position.y = y + 0.5;
 
-    if(x <0.5 && y<-0.5){
-        console.log("Links-onder")
-        // //MousePos is (0,-2) links-onder
-        globe.rotation.x = 1;
-        globe.rotation.y = -2
-    }
+    // if(x <0.5 && y<-0.5){
+    //     console.log("Links-onder")
+    //     // //MousePos is (0,-2) links-onder
+    //     globe.rotation.x = 1;
+    //     globe.rotation.y = -2
+    // }
 
-    if(x>0.5 && y<-0.5){
-        console.log("Rechts-onder")
-        //MousePos is (2,-2)
-        globe.rotation.x = 1
-        globe.rotation.y = 0
-    }
+    // if(x>0.5 && y<-0.5){
+    //     console.log("Rechts-onder")
+    //     //MousePos is (2,-2)
+    //     globe.rotation.x = 1
+    //     globe.rotation.y = 0
+    // }
 
-    if(x>0.5 && y>-0.5){
-        console.log("Rechts-boven")
-        //MousePos is (2,0)
-        globe.rotation.x = -1
-        globe.rotation.y = 0
-    }
+    // if(x>0.5 && y>-0.5){
+    //     console.log("Rechts-boven")
+    //     //MousePos is (2,0)
+    //     globe.rotation.x = -1
+    //     globe.rotation.y = 0
+    // }
 
-    if(x<0.5 && y>-0.5){
-        console.log("Links-boven")
-        //MousePos is (0,0)
-        globe.rotation.x = -1
-        globe.rotation.y = -2
-    }
+    // if(x<0.5 && y>-0.5){
+    //     console.log("Links-boven")
+    //     //MousePos is (0,0)
+    //     globe.rotation.x = -1
+    //     globe.rotation.y = -2
+    // }
 
-    if(x<0.25 && y>-0.75 && y<-0.25 ){
-        console.log("Links")
-        //MousePos is (0,0)
-        globe.rotation.x = -1
-        globe.rotation.y = -2
-    }
+    // if(x<0.25 && y>-0.75 && y<-0.25 ){
+    //     console.log("Links")
+    //     //MousePos is (0,0)
+    //     globe.rotation.x = -1
+    //     globe.rotation.y = -2
+    // }
 
-    if(x>0.25 && x<0.75 && y<-0.25 && y>-0.75){
-        console.log("midden")
-        //MousePos is (0,0)
-        globe.rotation.x = 0
-        globe.rotation.y = -1
-    }
+    // if(x>0.25 && x<0.75 && y<-0.25 && y>-0.75){
+    //     console.log("midden")
+    //     //MousePos is (0,0)
+    //     globe.rotation.x = 0
+    //     globe.rotation.y = -1
+    // }
+
+
+    // Get center point from window
+    const fromCenterpointX = (window.innerWidth / 2) - (event.clientX);
+    const fromCenterpointY = (window.innerHeight / 2) - (event.clientY);
+
+    // Calculate the percentage from centerpoint
+    const o = (fromCenterpointX / 2) / (window.innerWidth / 2) * 100;
+    const p = (fromCenterpointY / 2) / (window.innerHeight / 2) * 100;
+
+    //Verander Pos
+    // globe.position.x = -event.clientX+50;
+    // globe.position.y = event.clientY;
+    // globe.position.x = -x
+    // globe.position.y = y
+
+    console.log(y, x);
+
+    // Rotate globes (eyes)
+    rotateScene(globe, -p, -o);
+}
+let lookMaxX = 0.02;
+let lookMaxY = 0.02;
+// Make sure to maximize the rotation and the eye keep looking forward
+function rotateScene(globe_, deltaX, deltaY) {
+    globe_.rotation.y = -1 + deltaY * lookMaxY;
+    globe_.rotation.x = 0.15 + deltaX * lookMaxX;
 }
 
 
