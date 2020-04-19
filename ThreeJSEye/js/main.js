@@ -119,8 +119,8 @@ document.onmousemove = function(event){
     // Rotate globes (eyes)
     rotateScene(globe, -p, -o);
 }
-
-
+let lookMaxX = 0.02;
+let lookMaxY = 0.02;
 // Make sure to maximize the rotation and the eye keep looking forward
 function rotateScene(globe_, deltaX, deltaY) {
     globe_.rotation.y = -1 + deltaY * lookMaxY;
