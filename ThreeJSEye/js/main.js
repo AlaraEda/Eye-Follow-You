@@ -36,7 +36,7 @@ scene.add( globe );                                                             
 
 globe.position.x = 0;
 
-camera.position()
+//camera.position()
 camera.position.z = 5;                                                                                      //Hoe ver de camera is ingezoemd                                                                                    //Move camera zodat die niet in de cube vast zit.
 
 //Eventlistener
