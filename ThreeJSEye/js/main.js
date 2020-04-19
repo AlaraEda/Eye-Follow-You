@@ -29,6 +29,7 @@ var geometry = new THREE.SphereGeometry( 1, 60, 60 );                           
 var texture = new THREE.TextureLoader().load( 'textures/iris5.png' );                                       //Load tekening
 var material = new THREE.MeshBasicMaterial( { color: 0xffffff, map: texture } );                            //Coloring the cube
 var globe = new THREE.Mesh( geometry, material );                                                           //Apply material to object.
+
 globe.rotation.x = 0;
 globe.rotation.y = -1;
 scene.add( globe );                                                                                         //Add to coordination (0,0,0), camera en cube zitten in elkaar.  
@@ -55,7 +56,7 @@ document.onmousemove = function(event){
     const x = (event.clientX / window.innerWidth) ;
 
     globe.position.x = x;
-    globe.position.y = y;
+    globe.position.y = y + 0.5;
 
     // if(x <0.5 && y<-0.5){
     //     console.log("Links-onder")
