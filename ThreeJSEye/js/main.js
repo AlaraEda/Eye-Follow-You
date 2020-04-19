@@ -54,44 +54,66 @@ document.onmousemove = function(event){
     const x = (event.clientX / window.innerWidth) ;
 
     globe.position.x = x;
-    globe.position.y = y;
+    globe.position.y = y+0.7;
 
-    if(x <0.5 && y<-0.5){
+    if(x <0.35 && y<-0.7){
         console.log("Links-onder")
-        // //MousePos is (0,-2) links-onder
-        globe.rotation.x = 1;
-        globe.rotation.y = -2
+        // //MousePos is (0,-1) links-onder
+        globe.rotation.x = -6; //beter dan 1
+        globe.rotation.y = -1.4;
     }
 
-    if(x>0.5 && y<-0.5){
+    if(x >0.35 && x< 0.7 && y<-0.7){
+        console.log("Onder")
+        //MousePos is (0.5,-1) links-onder (-6,-7.25)
+        globe.rotation.x = -5.7;
+        globe.rotation.y = -7.25;
+    }
+
+    if(x>0.7 && y<-0.7){
         console.log("Rechts-onder")
-        //MousePos is (2,-2)
-        globe.rotation.x = 1
-        globe.rotation.y = 0
+        //MousePos is (1,-1)
+        globe.rotation.x = -5.9
+        globe.rotation.y = -0.2
     }
 
-    if(x>0.5 && y>-0.5){
+    if(x>0.7 && y<-0.35 && y>-0.7){
+        console.log("Rechts")
+        //MousePos is (1,-0.5) (-0.1, 0)
+        globe.rotation.x = -0.1
+        globe.rotation.y = -0.2
+    }
+
+    if(x>0.7 && y>-0.35){
         console.log("Rechts-boven")
-        //MousePos is (2,0)
-        globe.rotation.x = -1
-        globe.rotation.y = 0
+        //MousePos is (1,-1)
+        globe.rotation.x = -0.7
+        globe.rotation.y = -0.2
     }
 
-    if(x<0.5 && y>-0.5){
+    if(x>0.35 && x<0.7 && y>-0.35){
+        console.log("Boven")
+        //MousePos is (0.5, -0.35)
+        globe.rotation.x= -1
+        globe.rotation.y= -1
+    }
+
+    if(x<0.35 && y>-0.35){
         console.log("Links-boven")
         //MousePos is (0,0)
-        globe.rotation.x = -1
-        globe.rotation.y = -2
+        globe.rotation.x = -0.7
+        globe.rotation.y = -1.8
     }
 
-    if(x<0.25 && y>-0.75 && y<-0.25 ){
+    if(x<0.35 && y>-0.7 && y<-0.35 ){
         console.log("Links")
-        //MousePos is (0,0)
-        globe.rotation.x = -1
-        globe.rotation.y = -2
+        //MousePos is (0,-0.5)
+        //0,-2?
+        globe.rotation.x = -0.1
+        globe.rotation.y = -1.8
     }
 
-    if(x>0.25 && x<0.75 && y<-0.25 && y>-0.75){
+    if(x>0.35 && x<0.70 && y<-0.35 && y>-0.7){
         console.log("midden")
         //MousePos is (0,0)
         globe.rotation.x = 0
