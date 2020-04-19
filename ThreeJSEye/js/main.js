@@ -36,6 +36,7 @@ scene.add( globe );                                                             
 
 globe.position.x = 0;
 
+camera.position()
 camera.position.z = 5;                                                                                      //Hoe ver de camera is ingezoemd                                                                                    //Move camera zodat die niet in de cube vast zit.
 
 //Eventlistener
@@ -61,6 +62,12 @@ document.onmousemove = function(event) {
     // Calculate the percentage from centerpoint
     const x = (fromCenterpointX / 2) / (window.innerWidth / 2) * 100;
     const y = (fromCenterpointY / 2) / (window.innerHeight / 2) * 100;
+
+    //Verander Pos
+    // globe.position.x = -event.clientX+50;
+    // globe.position.y = event.clientY;
+    // globe.position.x = -x
+    // globe.position.y = y
 
     console.log(y, x);
 
